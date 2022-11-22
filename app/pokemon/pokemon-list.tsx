@@ -8,6 +8,7 @@ interface PokemonSpeciesListProps {
 
 export default function PokemonSpeciesList(props: PokemonSpeciesListProps) {
   let { species } = props;
+
   return (
     <>
       {species.map(({ name, id }) => (
