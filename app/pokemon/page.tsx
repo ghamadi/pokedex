@@ -1,13 +1,13 @@
 import React from 'react';
-import { getPokemonSpecies, getPokemonSpeciesList } from '../../src/api/spcies';
+import { getPokemon, getPokemonSpeciesList } from '../../src/api/spcies';
 import PokemonSpeciesList from './pokemon-list';
 
 const LIMIT = 40;
 
 export default async function PokemonList() {
   let speciesNamedResources = (await getPokemonSpeciesList(0, LIMIT)).results;
-  let species = (await Promise.all(speciesNamedResources.map(({ url }) => getPokemonSpecies(url))));
+  let species = (await Promise.all(speciesNamedResources.map(({ name }) => getPokemon(`${process.env.NEXT_PUBLIC_POKE_API_POKEMON}/${name}`))));
 
-  return <PokemonSpeciesList species={species} offset={LIMIT} />;
+  return <PokemonSpeciesList species={species} />;
 }
 

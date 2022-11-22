@@ -28,7 +28,7 @@ export interface PokemonType {
   type: NamedApiResource;
 }
 
-export interface PokemonSpeciesApiResponse {
+export interface PokemonApiResponse {
   id: number;
   name: string;
   weight: number;

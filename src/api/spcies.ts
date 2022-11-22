@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { ListApiResponse, PokemonSpeciesApiResponse } from '../../poke-api-types';
+import { ListApiResponse, PokemonApiResponse } from '../../poke-api-types';
 
 export async function getPokemonSpeciesList(offset: number, limit: number): Promise<ListApiResponse> {
-  return (await axios.get(`${process.env.POKE_API_SPECIES}/?offset=${offset}&limit=${limit}`)).data;
+  return (await axios.get(`${process.env.NEXT_PUBLIC_POKE_API_POKEMON}/?offset=${offset}&limit=${limit}`)).data;
 }
 
-export async function getPokemonSpecies(url: string): Promise<PokemonSpeciesApiResponse> {
+export async function getPokemon(url: string): Promise<PokemonApiResponse> {
   return (await axios.get(url)).data;
 }
