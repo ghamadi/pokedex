@@ -3,7 +3,6 @@ import { ListApiResponse, PokemonApiResponse } from '../../poke-api-types';
 
 export async function getPokemonList(offset: number, limit?: number): Promise<ListApiResponse> {
   let limitParam = limit ? `limit=${limit}` : '';
-  console.log('URL', `${process.env.NEXT_PUBLIC_POKE_API_POKEMON}/?${limitParam}&offset=${offset}`);
   return (await axios.get(`${process.env.NEXT_PUBLIC_POKE_API_POKEMON}/?${limitParam}&offset=${offset}`)).data;
 }
 
