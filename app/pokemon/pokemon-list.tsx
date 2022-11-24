@@ -13,7 +13,12 @@ interface QueryData {
 }
 
 export default function PokemonList({ pokemon }: { pokemon: PokemonApiResponse[] }) {
-  let { namedResources } = usePokemon();
+  let { data: { namedResources } } = usePokemon();
+
+  async function getPokemonDetailedList(offset: number) {
+    let pokemonList = (await Promise.all(namedResources.slice(offset, offset + 40).map(({ url }) => getPokemon(url))));
+    return { pokemonList, hasNext: offset < namedResources.length };
+  }
 
   let { data, hasNextPage, fetchNextPage } = useInfiniteQuery<QueryData>(
     'pokemonList',
@@ -23,12 +28,6 @@ export default function PokemonList({ pokemon }: { pokemon: PokemonApiResponse[]
       getNextPageParam: (lastPage, allPages) => lastPage.hasNext ? allPages.length + 1 : undefined
     }
   );
-
-  async function getPokemonDetailedList(offset: number) {
-    console.log(offset, namedResources.length);
-    let pokemonList = (await Promise.all(namedResources.slice(offset, offset + 40).map(({ url }) => getPokemon(url))));
-    return { pokemonList, hasNext: offset < namedResources.length };
-  }
 
   useEffect(() => {
     let fetching = false;
@@ -52,7 +51,7 @@ export default function PokemonList({ pokemon }: { pokemon: PokemonApiResponse[]
   }, [fetchNextPage, hasNextPage]);
 
   return (
-    <div style={{ width: '500px', margin: 'auto' }}>
+    <div >
       {data?.pages.map(({ pokemonList }, index) => (
         <div key={index} style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 10 }}>
           {pokemonList.map(({ id, name, sprites }) => (
