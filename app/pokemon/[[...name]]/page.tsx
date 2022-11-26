@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import React from 'react';
 import { getPokemon } from '~/src/api/pokemon';
 
@@ -11,11 +12,17 @@ export default async function Page({ params }: { params: Record<string, string[]
     return <div></div>;
   }
 
+  if (name.length > 1) {
+    notFound();
+  }
+
   let pokemon = await getPokemon(`${process.env.NEXT_PUBLIC_POKE_API_POKEMON}/${name[0]}`);
 
   return (
-    <h1 style={{ color: 'red' }}>
-      {pokemon.name}
-    </h1>
+    <>
+      <h1 style={{ color: 'red' }}>
+        {pokemon.name}
+      </h1>
+    </>
   );
 }
