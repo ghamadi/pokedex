@@ -1,30 +1,25 @@
 import { notFound } from 'next/navigation';
-import React from 'react';
-import { getPokemon } from '~/src/api/pokemon';
-import PokemonDisplayCard from '~/src/components/pokemon-display-card';
+import { PokemonAPI } from '~/src/api/pokemon';
 
-// This is where pokemon details are displayed
-// The list (in the layout) should become a list of links and each link points to /pokemon/name
-// this page uses the query params to fetch the pokemon's details and renders a portal
-export default async function Page({ params }: { params: Record<string, string[]> }) {
-  let { name = [] } = params;
+export default async function PokemonDetailsPage({ params }: { params: { name?: string | string[] } }) {
+  let pokemonName = [params.name].flat().join('');
 
-  if (!name.length) {
+  if (!pokemonName) {
     return <div></div>;
   }
 
-  if (name.length > 1) {
-    notFound();
+  try {
+    let api = new PokemonAPI();
+    let pokemon = await api.get(pokemonName);
+
+    return (
+      <div>
+        <p>{pokemon.id}</p>
+        <p>{pokemon.name}</p>
+      </div>
+    );
+
+  } catch (error) {
+    return notFound();
   }
-
-  let pokemon = await getPokemon(`${process.env.NEXT_PUBLIC_POKE_API_POKEMON}/${name[0]}`);
-
-  return (
-    <>
-      {/* @ts-expect-error Server Component */ }
-      <PokemonDisplayCard id={pokemon.name} width={120}/>
-      {/* @ts-expect-error Server Component */ }
-      <PokemonDisplayCard id={pokemon.name} width={140}/>
-    </>
-  );
 }

@@ -23,10 +23,12 @@ export class PokemonAPI {
   });
 
   getList = cache(async ({ offset = 0, limit }: { offset?: number; limit?: number }) => {
-    let url = this.buildURL({ params: { offset } });
+    let url = this.buildURL({ href: `${API_PATH}/pokemon`, params: { offset } });
+
     let count = limit ?? (await axios.get(url)).data.count as number;
     url = this.buildURL({ href: url, params: { limit: count } });
-    return (await axios.get(url)).data as Promise<PokemonApiResponse[]>;
+
+    return (await axios.get(url)).data as Promise<ListApiResponse>;
   });
 
   getColorOf = cache(async (pokemonId: string | number) => (await this.getSpeciesOf(pokemonId)).color.name);

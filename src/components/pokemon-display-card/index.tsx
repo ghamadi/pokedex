@@ -1,9 +1,13 @@
+'use client';
+
+import { useQuery } from 'react-query';
 import { PokemonAPI } from '~/src/api/pokemon';
 import styles from './styles.module.scss';
 
 interface PokemonDisplayCardProps {
   id: string;
   width?: number | string;
+  height?: number | string;
 }
 
 const TYPE_TO_COLOR: Record<string, string> = {
@@ -29,16 +33,20 @@ const TYPE_TO_COLOR: Record<string, string> = {
   shadow: '#807870'
 };
 
-export default async function PokemonDisplayCard(props: PokemonDisplayCardProps) {
-  let { id: idString, width = 120 } = props;
+export default function PokemonDisplayCard(props: PokemonDisplayCardProps) {
+  let { id: idString, width = '100%', height = '100%' } = props;
   let api = new PokemonAPI();
-  let pokemon = await api.get(idString);
+  let { data: pokemon, isError, isLoading } = useQuery(['getPokemon', idString], () => api.get(idString));
 
-  if (!pokemon) {
-    throw new Error(`Pokemon ID ${idString} does not exist`);
+  if (isLoading) {
+    return <p>Loading...</p>;
   }
 
-  let { id, name, sprites, types } = pokemon;
+  if (isError) {
+    return null;
+  }
+
+  let { id, name, sprites, types } = pokemon!;
   let artworkSrc = sprites.other['official-artwork'].front_default;
   let color = TYPE_TO_COLOR[(types[0] ?? {}).type?.name ?? 'unknown'];
   width = isNaN(width as number) ? width : `${width}px`;
@@ -46,7 +54,7 @@ export default async function PokemonDisplayCard(props: PokemonDisplayCardProps)
   return (
     <div
       className={styles.pokemonCard}
-      style={{ backgroundImage: `url(${artworkSrc})`, borderColor: color, width, height: `calc(${width} * 1.15)` }}
+      style={{ backgroundImage: `url(${artworkSrc})`, borderColor: color, width, height: height ?? `calc(${width} * 1.15)` }}
     >
       <div className={styles.pokemonCard__idHolder}>
         <span style={{ color }}>#{`${id}`.padStart(4, '0')}</span>
