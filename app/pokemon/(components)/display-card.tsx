@@ -3,7 +3,7 @@
 import { useQuery } from 'react-query';
 import { PokemonAPI } from '~/src/api/pokemon';
 import { TYPE_TO_COLOR } from '~/src/constants';
-import styles from './styles.module.scss';
+import styles from './display-card.module.scss';
 
 interface PokemonDisplayCardProps {
   id: string;

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
-import PokemonDisplayCard from '~/src/components/pokemon-display-card';
+import PokemonDisplayCard from '~/app/pokemon/(components)/display-card';
 import styles from './cards-grid.module.scss';
 interface PokemonCardsListProps {
   names: string[];
