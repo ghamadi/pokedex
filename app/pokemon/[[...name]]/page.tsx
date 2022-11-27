@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import PokemonDetailsCard from '~/app/pokemon/(components)/details-card';
 import { PokemonAPI } from '~/src/api/pokemon';
 
 export default async function PokemonDetailsPage({ params }: { params: { name?: string | string[] } }) {
@@ -12,13 +13,7 @@ export default async function PokemonDetailsPage({ params }: { params: { name?: 
     let api = new PokemonAPI();
     let pokemon = await api.get(pokemonName);
 
-    return (
-      <div>
-        <p>{pokemon.id}</p>
-        <p>{pokemon.name}</p>
-      </div>
-    );
-
+    return <PokemonDetailsCard pokemon={pokemon} />;
   } catch (error) {
     return notFound();
   }

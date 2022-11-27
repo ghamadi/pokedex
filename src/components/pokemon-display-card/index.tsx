@@ -2,6 +2,7 @@
 
 import { useQuery } from 'react-query';
 import { PokemonAPI } from '~/src/api/pokemon';
+import { TYPE_TO_COLOR } from '~/src/constants';
 import styles from './styles.module.scss';
 
 interface PokemonDisplayCardProps {
@@ -9,29 +10,6 @@ interface PokemonDisplayCardProps {
   width?: number | string;
   height?: number | string;
 }
-
-const TYPE_TO_COLOR: Record<string, string> = {
-  fairy: '#E69EAC',
-  normal: '#AAA67F',
-  fighting: '#C12239',
-  flying: '#A891EC',
-  poison: '#A43E9E',
-  ground: '#DEC16B',
-  rock: '#B69E31',
-  bug: '#A7B723',
-  ghost: '#70559B',
-  steel: '#B7B9D0',
-  fire: '#F57D31',
-  water: '#6493EB',
-  grass: '#74CB48',
-  electric: '#F9CF30',
-  psychic: '#FB5584',
-  ice: '#9AD6DF',
-  dragon: '#7037FF',
-  dark: '#75574C',
-  unknown: '#666666',
-  shadow: '#807870'
-};
 
 export default function PokemonDisplayCard(props: PokemonDisplayCardProps) {
   let { id: idString, width = '100%', height = '100%' } = props;
