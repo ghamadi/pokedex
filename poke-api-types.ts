@@ -28,6 +28,12 @@ export interface PokemonType {
   type: NamedApiResource;
 }
 
+export interface PokemonColor {
+  id: number;
+  name: string;
+  pokemon_species: NamedApiResource[];
+}
+
 export interface PokemonApiResponse {
   id: number;
   name: string;
@@ -38,6 +44,12 @@ export interface PokemonApiResponse {
   sprites: Sprites;
   stats: PokemonStat[];
   types: PokemonType[];
+}
+
+export interface PokemonSpeciesApiResponse {
+  id: number;
+  name: string;
+  color: NamedApiResource;
 }
 
 export interface ListApiResponse {

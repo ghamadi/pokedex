@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import React from 'react';
 import { getPokemon } from '~/src/api/pokemon';
+import PokemonDisplayCard from '~/src/components/pokemon-display-card';
 
 // This is where pokemon details are displayed
 // The list (in the layout) should become a list of links and each link points to /pokemon/name
@@ -20,9 +21,10 @@ export default async function Page({ params }: { params: Record<string, string[]
 
   return (
     <>
-      <h1 style={{ color: 'red' }}>
-        {pokemon.name}
-      </h1>
+      {/* @ts-expect-error Server Component */ }
+      <PokemonDisplayCard id={pokemon.name} width={120}/>
+      {/* @ts-expect-error Server Component */ }
+      <PokemonDisplayCard id={pokemon.name} width={140}/>
     </>
   );
 }
