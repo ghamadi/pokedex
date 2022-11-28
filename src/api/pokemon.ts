@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { cache } from 'react';
-import { ListApiResponse, PokemonApiResponse, PokemonSpeciesApiResponse } from '../../poke-api-types';
+import { ListApiResponse, PokemonApiResponse, PokemonSpeciesApiResponse } from '../poke-api-types';
 
 export const getPokemonList = cache(async (offset: number, limit?: number): Promise<ListApiResponse> => {
   let limitParam = limit ? `limit=${limit}` : '';

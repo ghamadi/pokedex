@@ -3,6 +3,7 @@
 import { useQuery } from 'react-query';
 import { PokemonAPI } from '~/src/api/pokemon';
 import { TYPE_TO_COLOR } from '~/src/constants';
+import { formatId, formatPokemonName } from '~/src/utils/string';
 import styles from './display-card.module.scss';
 
 interface PokemonDisplayCardProps {
@@ -35,10 +36,10 @@ export default function PokemonDisplayCard(props: PokemonDisplayCardProps) {
       style={{ backgroundImage: `url(${artworkSrc})`, borderColor: color, width, height: height ?? `calc(${width} * 1.15)` }}
     >
       <div className={styles.pokemonCard__idHolder}>
-        <span style={{ color }}>#{`${id}`.padStart(4, '0')}</span>
+        <span style={{ color }}>{formatId(id)}</span>
       </div>
       <div className={styles.pokemonCard__nameHolder} style={{ backgroundColor: color, borderColor: color }}>
-        <span>{name}</span>
+        <span>{formatPokemonName(name)}</span>
       </div>
     </div>
   );

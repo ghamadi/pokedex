@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import PokemonCardsGrid from '~/app/pokemon/(components)/cards-grid';
+import PokemonCardsGrid from '~/app/pokemon/components/cards-grid';
 import { PokemonAPI } from '~/src/api/pokemon';
 import styles from './styles.module.scss';
 

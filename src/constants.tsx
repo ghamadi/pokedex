@@ -1,4 +1,4 @@
-export const TYPE_TO_COLOR: Record<string, string> = {
+export const TYPE_TO_COLOR = {
   fairy: '#E69EAC',
   normal: '#AAA67F',
   fighting: '#C12239',
@@ -19,4 +19,6 @@ export const TYPE_TO_COLOR: Record<string, string> = {
   dark: '#75574C',
   unknown: '#666666',
   shadow: '#807870'
-};
+} as const;
+
+export type PokemonTypeName = keyof typeof TYPE_TO_COLOR;

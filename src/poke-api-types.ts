@@ -1,5 +1,7 @@
+import { PokemonTypeName } from '~/src/constants';
+
 export interface NamedApiResource {
-  name: string;
+  name: PokemonTypeName;
   url: string;
 }
 
