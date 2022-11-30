@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import PokemonDetailsCard from '~/app/pokemon/components/details-card';
+import PokemonDetailsCard from '~/app/components/details-card';
 import { PokemonAPI } from '~/src/api/pokemon';
 
 export default async function PokemonDetailsPage({ params }: { params: { name?: string | string[] } }) {

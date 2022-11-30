@@ -3,7 +3,7 @@ import { PokemonApiResponse } from '~/src/poke-api-types';
 import { TYPE_TO_COLOR } from '~/src/constants';
 import { formatId, formatPokemonName } from '~/src/utils/string';
 import styles from './details-card.module.scss';
-import PokemonTypeChip from '~/app/pokemon/components/type-chip';
+import PokemonTypeChip from '~/app/components/type-chip';
 
 interface DetailsCardProps {
   pokemon: PokemonApiResponse;
