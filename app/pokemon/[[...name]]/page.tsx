@@ -3,15 +3,13 @@ import PokemonDetailsCard from '~/app/components/details-card';
 import { PokemonAPI } from '~/src/api/pokemon';
 
 interface PageParams {
-  pageNum: string;
   name?: string | string[];
-
 }
 
 export default async function PokemonDetailsPage({ params }: { params: PageParams }) {
-  let { name, pageNum } = params;
+  let { name } = params;
 
-  if (!isValidPageNum(pageNum) || !isValidNameParam(name)) {
+  if (!isValidNameParam(name)) {
     return notFound();
   }
 
@@ -31,9 +29,9 @@ export default async function PokemonDetailsPage({ params }: { params: PageParam
   }
 }
 
-function isValidPageNum(pageNum: string) {
-  return /^p\d+$/.test(pageNum);
-}
+// function isValidPageNum(pageNum: string) {
+//   return /^p\d+$/.test(pageNum);
+// }
 
 function isValidNameParam(name: string | string[] | undefined) {
   return !Array.isArray(name) || name.length === 1;

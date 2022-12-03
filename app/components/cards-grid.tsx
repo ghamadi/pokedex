@@ -34,7 +34,7 @@ export default function PokemonCardsList({ names, initialCount = 20 }: PokemonCa
   return (
     <div className={styles.cardsGrid}>
       {names.slice(0, offset).map(name => (
-        <Link href={`/pokemon/p1/${name}`} key={name} className={styles.cardsGrid__item}>
+        <Link href={`/pokemon/${name}`} key={name} className={styles.cardsGrid__item}>
           <PokemonDisplayCard id={name} width='100%' />
         </Link>
       ))}
