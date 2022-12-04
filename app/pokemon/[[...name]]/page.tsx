@@ -29,10 +29,6 @@ export default async function PokemonDetailsPage({ params }: { params: PageParam
   }
 }
 
-// function isValidPageNum(pageNum: string) {
-//   return /^p\d+$/.test(pageNum);
-// }
-
 function isValidNameParam(name: string | string[] | undefined) {
   return !Array.isArray(name) || name.length === 1;
 }
