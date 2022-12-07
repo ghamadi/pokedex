@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import PokemonDetailsCard from '~/app/components/details-card';
-import { PokemonAPI } from '~/src/api/pokemon';
 
 interface PageParams {
   name?: string | string[];
@@ -19,14 +18,8 @@ export default async function PokemonDetailsPage({ params }: { params: PageParam
     return <div>Select a pokemon to view its details</div>;
   }
 
-  try {
-    let api = new PokemonAPI();
-    let pokemon = await api.get(pokemonName);
-
-    return <PokemonDetailsCard pokemon={pokemon} />;
-  } catch (error) {
-    return notFound();
-  }
+  //@ts-ignore (workaround because PokemonDetailsCard is a server component. Nextjs people are working on this.)
+  return <PokemonDetailsCard idString={pokemonName} />;
 }
 
 function isValidNameParam(name: string | string[] | undefined) {

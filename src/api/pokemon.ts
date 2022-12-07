@@ -13,13 +13,19 @@ const API_PATH = process.env.NEXT_PUBLIC_POKE_API ?? '';
 
 export class PokemonAPI {
   get = cache(async (id: string | number) => {
-    let url = `${API_PATH}/pokemon/${id}`;
-    return (await axios.get(url)).data as Promise<PokemonApiResponse>;
+    try {
+      let url = `${API_PATH}/pokemon/${id}`;
+      return (await axios.get(url)).data as Promise<PokemonApiResponse>;
+    } catch (e) {
+      return null;
+    }
   });
 
   getSpeciesOf = cache(async (pokemonId: string | number) => {
-    let speciesURL = (await this.get(pokemonId)).species.url;
-    return (await axios.get(speciesURL)).data as PokemonSpeciesApiResponse;
+    let speciesURL = (await this.get(pokemonId))?.species.url;
+    return speciesURL
+      ? (await axios.get(speciesURL)).data as PokemonSpeciesApiResponse
+      : null;
   });
 
   getList = cache(async ({ offset = 0, limit }: { offset?: number; limit?: number }) => {
@@ -31,7 +37,7 @@ export class PokemonAPI {
     return (await axios.get(url)).data as Promise<ListApiResponse>;
   });
 
-  getColorOf = cache(async (pokemonId: string | number) => (await this.getSpeciesOf(pokemonId)).color.name);
+  getColorOf = cache(async (pokemonId: string | number) => (await this.getSpeciesOf(pokemonId))?.color.name ?? null);
 
   private buildURL({ href, params }: { href?: string; params?: Record<string, unknown> }) {
     let url = new URL(href ?? API_PATH);

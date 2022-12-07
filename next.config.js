@@ -5,8 +5,7 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      { source: '/', destination: '/pokemon/p1', permanent: true },
-      { source: '/pokemon', destination: '/pokemon/p1', permanent: true }
+      { source: '/', destination: '/pokemon', permanent: true }
     ];
   }
 };
