@@ -4,6 +4,7 @@ import styles from './details-card.module.scss';
 import PokemonTypeChip from '~/app/components/type-chip';
 import { PokemonAPI } from '~/src/api/pokemon';
 import { notFound } from 'next/navigation';
+import { getMaxStat } from '~/src/utils/pokemon';
 
 interface DetailsCardProps {
   idString: string;
@@ -17,7 +18,7 @@ export default async function PokemonDetailsCard({ idString }: DetailsCardProps)
     return notFound();
   }
 
-  let { id, name, sprites, types } = pokemon;
+  let { id, name, sprites, types, stats } = pokemon;
   let typeColor = TYPE_TO_COLOR[types[0].type.name];
 
   return (
@@ -42,7 +43,12 @@ export default async function PokemonDetailsCard({ idString }: DetailsCardProps)
             </div>
           </div>
         </div>
-        <div className={styles.card__stats}></div>
+        <div className={styles.card__stats}>
+          {/* eslint-disable-next-line camelcase */}
+          {stats.map(({ stat, base_stat: baseStat }) => (
+            <p key={stat.name}>{stat.name}: {baseStat} / {getMaxStat(stat.name, baseStat)}</p>
+          ))}
+        </div>
       </div>
     </div>
   );
