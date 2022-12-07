@@ -1,0 +1,22 @@
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(140px, 1fr));
+  grid-auto-rows: 200px;
+  gap: 10px;
+  overflow-y: auto;
+  max-height: 100vh;
+  justify-content: center;
+  padding: 10px;
+
+  &__item {
+    aspect-ratio: 16/18;
+  }
+
+  &__moreBtn {
+    grid-column: 1 / -1;
+    height: 50px;
+    width: 150px;
+    justify-self: center;
+    align-self: center;
+  }
+}

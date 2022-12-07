@@ -1,0 +1,61 @@
+.card {
+  min-width: 360px;
+  min-height: 640px;
+  border-radius: 12px;
+  padding: 24px 2px 2px 2px;
+  position: relative;
+
+  &__header {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+  }
+
+  &__name {
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  &__id {
+    font-size: 14px;
+  }
+
+  &__picture {
+    position: absolute;
+    top: 12.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    z-index: 1;
+  }
+
+  &__detailsWrapper {
+    height: 65%;
+    background-color: white;
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    border-radius: 8px;
+    padding-top: 12%;
+  }
+
+  &__about {
+
+  }
+
+  &__aboutLabel {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  &__detailDisplay {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+}

@@ -1,0 +1,12 @@
+.layout {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+
+  &__detailsWrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
